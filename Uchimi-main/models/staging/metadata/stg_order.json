@@ -1,0 +1,528 @@
+{
+  "name": "stg_order",
+  "sql": "SELECT \n  ShipAddress,\n  ShipCity,\n  ShipRegion\nFROM \"Order\"\nWHERE OrderDate > '2012-10-28';",
+  "dialect": "sqlite",
+  "documentation": [
+    {
+      "column": "ShipAddress",
+      "source": "ShipAddress",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "column": "ShipCity",
+      "source": "ShipCity",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "column": "ShipRegion",
+      "source": "ShipRegion",
+      "type": "string",
+      "description": ""
+    }
+  ],
+  "preview": [
+    {
+      "ShipAddress": "12, rue des Bouchers",
+      "ShipCity": "Marseille",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Vinbæltet 34",
+      "ShipCity": "Kobenhavn",
+      "ShipRegion": "Northern Europe"
+    },
+    {
+      "ShipAddress": "Berliner Platz 43",
+      "ShipCity": "München",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Magazinweg 7",
+      "ShipCity": "Frankfurt a.M.",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "1029 - 12th Ave. S.",
+      "ShipCity": "Seattle",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Taucherstraße 10",
+      "ShipCity": "Cunewalde",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "2817 Milton Dr.",
+      "ShipCity": "Albuquerque",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Rua Orós, 92",
+      "ShipCity": "Sao Paulo",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Adenauerallee 900",
+      "ShipCity": "Stuttgart",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "P.O. Box 555",
+      "ShipCity": "Lander",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "1 rue Alsace-Lorraine",
+      "ShipCity": "Toulouse",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Kirchgasse 6",
+      "ShipCity": "Graz",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Jardim das rosas n. 32",
+      "ShipCity": "Lisboa",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "Geislweg 14",
+      "ShipCity": "Salzburg",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Calle Dr. Jorge Cash 321",
+      "ShipCity": "México D.F.",
+      "ShipRegion": "Central America"
+    },
+    {
+      "ShipAddress": "Brook Farm Stratford St. Mary",
+      "ShipCity": "Colchester",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "Adenauerallee 900",
+      "ShipCity": "Stuttgart",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Carrera 52 con Ave. Bolívar #65-98 Llano Largo",
+      "ShipCity": "Barquisimeto",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "1 rue Alsace-Lorraine",
+      "ShipCity": "Toulouse",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "90 Wadhurst Rd.",
+      "ShipCity": "London",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "24, place Kléber",
+      "ShipCity": "Strasbourg",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Taucherstraße 10",
+      "ShipCity": "Cunewalde",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "12, rue des Bouchers",
+      "ShipCity": "Marseille",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Walserweg 21",
+      "ShipCity": "Aachen",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "35 King George",
+      "ShipCity": "London",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "Mataderos  2312",
+      "ShipCity": "México D.F.",
+      "ShipRegion": "Central America"
+    },
+    {
+      "ShipAddress": "Rambla de Cataluña, 23",
+      "ShipCity": "Barcelona",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "Smagsloget 45",
+      "ShipCity": "Århus",
+      "ShipRegion": "Northern Europe"
+    },
+    {
+      "ShipAddress": "Kirchgasse 6",
+      "ShipCity": "Graz",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "P.O. Box 555",
+      "ShipCity": "Lander",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Hauptstr. 31",
+      "ShipCity": "Bern",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "1 rue Alsace-Lorraine",
+      "ShipCity": "Toulouse",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Alameda dos Canàrios, 891",
+      "ShipCity": "Sao Paulo",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "8 Johnstown Road",
+      "ShipCity": "Cork",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "ul. Filtrowa 68",
+      "ShipCity": "Warszawa",
+      "ShipRegion": "Eastern Europe"
+    },
+    {
+      "ShipAddress": "City Center Plaza 516 Main St.",
+      "ShipCity": "Elgin",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "43 rue St. Laurent",
+      "ShipCity": "Montréal",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "90 Wadhurst Rd.",
+      "ShipCity": "London",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "Åkergatan 24",
+      "ShipCity": "Bräcke",
+      "ShipRegion": "Northern Europe"
+    },
+    {
+      "ShipAddress": "Rua da Panificadora, 12",
+      "ShipCity": "Rio de Janeiro",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "8 Johnstown Road",
+      "ShipCity": "Cork",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "Carrera 52 con Ave. Bolívar #65-98 Llano Largo",
+      "ShipCity": "Barquisimeto",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Kirchgasse 6",
+      "ShipCity": "Graz",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Brook Farm Stratford St. Mary",
+      "ShipCity": "Colchester",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "Berguvsvägen  8",
+      "ShipCity": "Luleå",
+      "ShipRegion": "Northern Europe"
+    },
+    {
+      "ShipAddress": "P.O. Box 555",
+      "ShipCity": "Lander",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Rua Orós, 92",
+      "ShipCity": "Sao Paulo",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Erling Skakkes gate 78",
+      "ShipCity": "Stavern",
+      "ShipRegion": "Scandinavia"
+    },
+    {
+      "ShipAddress": "90 Wadhurst Rd.",
+      "ShipCity": "London",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "23 Tsawassen Blvd.",
+      "ShipCity": "Tsawassen",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Kirchgasse 6",
+      "ShipCity": "Graz",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Walserweg 21",
+      "ShipCity": "Aachen",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Geislweg 14",
+      "ShipCity": "Salzburg",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "187 Suffolk Ln.",
+      "ShipCity": "Boise",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "City Center Plaza 516 Main St.",
+      "ShipCity": "Elgin",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Carrera 22 con Ave. Carlos Soublette #8-35",
+      "ShipCity": "San Cristóbal",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Berliner Platz 43",
+      "ShipCity": "München",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Estrada da saúde n. 58",
+      "ShipCity": "Lisboa",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "187 Suffolk Ln.",
+      "ShipCity": "Boise",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Smagsloget 45",
+      "ShipCity": "Århus",
+      "ShipRegion": "Northern Europe"
+    },
+    {
+      "ShipAddress": "35 King George",
+      "ShipCity": "London",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "2817 Milton Dr.",
+      "ShipCity": "Albuquerque",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Kirchgasse 6",
+      "ShipCity": "Graz",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Kirchgasse 6",
+      "ShipCity": "Graz",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Via Ludovico il Moro 22",
+      "ShipCity": "Bergamo",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "Ave. 5 de Mayo Porlamar",
+      "ShipCity": "I. de Margarita",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Alameda dos Canàrios, 891",
+      "ShipCity": "Sao Paulo",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Mehrheimerstr. 369",
+      "ShipCity": "Köln",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "184, chaussée de Tournai",
+      "ShipCity": "Lille",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Ing. Gustavo Moncada 8585 Piso 20-A",
+      "ShipCity": "Buenos Aires",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "23 Tsawassen Blvd.",
+      "ShipCity": "Tsawassen",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "23 Tsawassen Blvd.",
+      "ShipCity": "Tsawassen",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Torikatu 38",
+      "ShipCity": "Oulu",
+      "ShipRegion": "Scandinavia"
+    },
+    {
+      "ShipAddress": "1 rue Alsace-Lorraine",
+      "ShipCity": "Toulouse",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Rua Orós, 92",
+      "ShipCity": "Sao Paulo",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "City Center Plaza 516 Main St.",
+      "ShipCity": "Elgin",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Torikatu 38",
+      "ShipCity": "Oulu",
+      "ShipRegion": "Scandinavia"
+    },
+    {
+      "ShipAddress": "Vinbæltet 34",
+      "ShipCity": "Kobenhavn",
+      "ShipRegion": "Northern Europe"
+    },
+    {
+      "ShipAddress": "Taucherstraße 10",
+      "ShipCity": "Cunewalde",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Starenweg 5",
+      "ShipCity": "Genève",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Rua do Mercado, 12",
+      "ShipCity": "Resende",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Rua da Panificadora, 12",
+      "ShipCity": "Rio de Janeiro",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "Via Monte Bianco 34",
+      "ShipCity": "Torino",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "Av. Brasil, 442",
+      "ShipCity": "Campinas",
+      "ShipRegion": "South America"
+    },
+    {
+      "ShipAddress": "43 rue St. Laurent",
+      "ShipCity": "Montréal",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "1 rue Alsace-Lorraine",
+      "ShipCity": "Toulouse",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Rambla de Cataluña, 23",
+      "ShipCity": "Barcelona",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "Geislweg 14",
+      "ShipCity": "Salzburg",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Strada Provinciale 124",
+      "ShipCity": "Reggio Emilia",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "8 Johnstown Road",
+      "ShipCity": "Cork",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "Kirchgasse 6",
+      "ShipCity": "Graz",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "23 Tsawassen Blvd.",
+      "ShipCity": "Tsawassen",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "P.O. Box 555",
+      "ShipCity": "Lander",
+      "ShipRegion": "North America"
+    },
+    {
+      "ShipAddress": "Estrada da saúde n. 58",
+      "ShipCity": "Lisboa",
+      "ShipRegion": "Southern Europe"
+    },
+    {
+      "ShipAddress": "Åkergatan 24",
+      "ShipCity": "Bräcke",
+      "ShipRegion": "Northern Europe"
+    },
+    {
+      "ShipAddress": "Berkeley Gardens 12  Brewery",
+      "ShipCity": "London",
+      "ShipRegion": "British Isles"
+    },
+    {
+      "ShipAddress": "24, place Kléber",
+      "ShipCity": "Strasbourg",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "Torikatu 38",
+      "ShipCity": "Oulu",
+      "ShipRegion": "Scandinavia"
+    },
+    {
+      "ShipAddress": "Luisenstr. 48",
+      "ShipCity": "Münster",
+      "ShipRegion": "Western Europe"
+    },
+    {
+      "ShipAddress": "43 rue St. Laurent",
+      "ShipCity": "Montréal",
+      "ShipRegion": "North America"
+    }
+  ],
+  "timestamp": "2025-07-15T09:16:53.519Z"
+}
