@@ -2,6 +2,146 @@ import React, { useEffect, useState } from "react";
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 
+function LandingPage() {
+  const navigate = useNavigate();
+  const centerX = 210;
+  const centerY = 210;
+  const radius = 140;
+  const nodeR = 38;
+  const angles = [270, 342, 54, 126, 198];
+  const labels = [
+    { label: 'Transform', grad: 'transformGrad' },
+    { label: 'Model', grad: 'modelGrad' },
+    { label: 'Quality', grad: 'qualityGrad', sub: 'Check' },
+    { label: 'Results', grad: 'resultsGrad' },
+    { label: 'Raw', grad: 'rawGrad' },
+  ];
+  const nodes = angles.map((deg, i) => {
+    const rad = (deg * Math.PI) / 180;
+    return { x: centerX + radius * Math.cos(rad), y: centerY + radius * Math.sin(rad), angle: deg, ...labels[i] };
+  });
+  function arcPath(cx, cy, r, startDeg, endDeg) {
+    const rad = a => (a * Math.PI) / 180;
+    const x1 = cx + r * Math.cos(rad(startDeg));
+    const y1 = cy + r * Math.sin(rad(startDeg));
+    const x2 = cx + r * Math.cos(rad(endDeg));
+    const y2 = cy + r * Math.sin(rad(endDeg));
+    const largeArc = Math.abs(endDeg - startDeg) > 180 ? 1 : 0;
+    const sweep = 1;
+    return `M${x1} ${y1} A ${r} ${r} 0 ${largeArc} ${sweep} ${x2} ${y2}`;
+  }
+
+  return (
+    <div className="modern-root">
+      <header className="modern-header">
+        <div className="logo-title">DataFlow Studio</div>
+      </header>
+
+      <section className="modern-hero">
+        <div className="hero-left">
+          <h1>Transform Your Data Visually</h1>
+          <p className="hero-desc">A modern platform to manage, build, and launch your data pipelines with ease. Visualize dependencies, track execution, and document everything in one place.</p>
+          <button className="modern-cta" onClick={() => navigate('/app')}>Get Started</button>
+        </div>
+        <div className="hero-right pipeline-center">
+          <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', maxWidth: '100%', transform: 'scale(1.2)' }}>
+            <defs>
+              <linearGradient id="rawGrad" x1="60" y1="210" x2="140" y2="290" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#60a5fa" />
+                <stop offset="1" stopColor="#3b82f6" />
+              </linearGradient>
+              <linearGradient id="transformGrad" x1="210" y1="60" x2="290" y2="140" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#2563eb" />
+                <stop offset="1" stopColor="#60a5fa" />
+              </linearGradient>
+              <linearGradient id="modelGrad" x1="340" y1="170" x2="420" y2="250" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#0ea5e9" />
+                <stop offset="1" stopColor="#60a5fa" />
+              </linearGradient>
+              <linearGradient id="qualityGrad" x1="260" y1="340" x2="340" y2="420" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#f59e42" />
+                <stop offset="1" stopColor="#fbbf24" />
+              </linearGradient>
+              <linearGradient id="resultsGrad" x1="100" y1="340" x2="180" y2="420" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#22c55e" />
+                <stop offset="1" stopColor="#4ade80" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="210" cy="210" rx="170" ry="170" fill="#60a5fa" fillOpacity="0.07" />
+			{(() => {
+			  const r = radius - 10;
+			  const segments = [
+				{ start: 0, end: 200, color: '#3b82f6', cls: 'ring-arc ring-arc--blue' },
+				{ start: 200, end: 300, color: '#22c55e', cls: 'ring-arc ring-arc--green' },
+				{ start: 300, end: 360, color: '#f59e0b', cls: 'ring-arc ring-arc--orange' },
+			  ];
+			  return segments.map((seg, i) => (
+				<path key={i} className={seg.cls} d={arcPath(centerX, centerY, r, seg.start, seg.end)} stroke={seg.color} strokeWidth="6" fill="none" strokeLinecap="round" />
+			  ));
+			})()}
+			{nodes.map((node, i) => (
+			  <g key={i}>
+				<circle className={`diagram-node${i === 0 ? ' active' : ''}`} cx={node.x} cy={node.y} r={nodeR} fill={`url(#${node.grad})`} stroke="#fff" strokeWidth={i === 0 ? 4 : 6} />
+				<text className="diagram-label" x={node.x} y={node.y + 7} textAnchor="middle" fontSize="18" fill="#fff">{node.label}</text>
+				{node.sub && (<text className="diagram-label" x={node.x} y={node.y + 25} textAnchor="middle" fontSize="13" fill="#fff">{node.sub}</text>)}
+			  </g>
+			))}
+          </svg>
+        </div>
+      </section>
+
+      <section id="how" className="features-section timeline-features">
+        <h2 className="features-title">How It Works</h2>
+        <div className="features-timeline">
+          {[
+            { title: 'Raw Data', desc: 'Import & Organize' },
+            { title: 'Transform', desc: 'Visual Builder' },
+            { title: 'Model', desc: 'ML Integration' },
+            { title: 'Analytics', desc: 'Live Results' },
+            { title: 'Security', desc: 'Safe & Reliable' },
+            { title: 'Automation', desc: 'Scheduling' },
+          ].map((item, i, arr) => (
+            <div className="timeline-step" key={item.title}>
+              <div className="timeline-dot" />
+              <div className="timeline-content">
+                <div className="timeline-title">{item.title}</div>
+                <div className="timeline-desc">{item.desc}</div>
+              </div>
+              {i !== arr.length - 1 && <div className="timeline-line" />}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="why" className="modern-why no-icons-why">
+        <h2>Why Choose Us?</h2>
+        <p className="why-intro">Build, manage, and launch pipelines—fast.</p>
+        <div className="why-list">
+          {[
+            { title: 'No-Code', desc: 'Drag & Drop' },
+            { title: 'Clarity', desc: 'Visual Dependencies' },
+            { title: 'Tracking', desc: 'Real-Time Status' },
+            { title: 'Docs', desc: 'Centralized' },
+            { title: 'Modern UX', desc: 'Intuitive' },
+          ].map((r) => (
+            <div className="why-list-item" key={r.title}>
+              <span className="why-list-title">{r.title}</span>
+              <span className="why-list-desc">{r.desc}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <footer className="modern-footer">
+        <div className="footer-content">
+          <span>© {new Date().getFullYear()} DataFlow Studio</span>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
 function Staging() {
   const location = useLocation();
   const [stagingName, setStagingName] = React.useState("");
@@ -497,7 +637,7 @@ function SidebarNav({ tables, selectedTable, setSelectedTable, sidebarStagings, 
                     onClick={() => {
                       if (openSection === 'source') {
                         setSelectedTable(table);
-                        navigate('/');
+                        navigate('/app');
                       }
                     }}
                   >
@@ -560,7 +700,7 @@ function SidebarNav({ tables, selectedTable, setSelectedTable, sidebarStagings, 
                     onClick={() => {
                       if (openSection === 'tables') {
                         setSelectedTable(table);
-                        navigate('/');
+                        navigate('/app');
                       }
                     }}
                   >
@@ -610,7 +750,7 @@ function SidebarNav({ tables, selectedTable, setSelectedTable, sidebarStagings, 
                 {sidebarStagings.map(name => (
                   <li key={name} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <Link
-                      to={`/staging`}
+                      to={`/app/staging`}
                       state={{ loadStaging: name }}
                       style={{
                         display: 'flex', alignItems: 'center', gap: 8, color: '#fff', textDecoration: 'none',
@@ -658,7 +798,7 @@ function SidebarNav({ tables, selectedTable, setSelectedTable, sidebarStagings, 
                 {deleteError && <div style={{ color: 'red', fontSize: 13, marginTop: 8 }}>{deleteError}</div>}
                 {/* New Staging Button */}
                 <button
-                  onClick={() => navigate('/staging', { state: { fromStagingButton: true } })}
+                  onClick={() => navigate('/app/staging', { state: { fromStagingButton: true } })}
                   style={{
                     marginTop: 10,
                     background: '#36f',
@@ -727,7 +867,7 @@ function SidebarNav({ tables, selectedTable, setSelectedTable, sidebarStagings, 
                       onClick={() => {
                         setSelectedCurated(name);
                         setSelectedTable('');
-                        navigate('/curated');
+                        navigate('/app/curated');
                       }}
                     >
                       {name}
@@ -739,7 +879,7 @@ function SidebarNav({ tables, selectedTable, setSelectedTable, sidebarStagings, 
                   onClick={() => {
                     setSelectedCurated('');
                     setSelectedTable('');
-                    navigate('/curated');
+                    navigate('/app/curated');
                   }}
                   style={{
                     marginTop: 10,
@@ -1157,79 +1297,77 @@ function App() {
 
   return (
     <Router>
-      <div style={{ minHeight: '100vh', background: '#f4f6fa' }}>
-        <Routes>
-          <Route path="*" element={
-            <>
-              <SidebarNavWrapper
-                tables={tables}
-                selectedTable={selectedTable}
-                setSelectedTable={setSelectedTable}
-                sidebarStagings={sidebarStagings}
-                curatedModels={curatedModels}
-                setSelectedCurated={setSelectedCurated}
-                selectedCurated={selectedCurated}
-              />
-              <main style={{ flex: 1, marginLeft: 220 }}>
-                <Routes>
-                  <Route path="/" element={
-                    <div style={{ padding: 40 }}>
-                      <header style={{ marginBottom: 32 }}>
-                        <h1 style={{ fontSize: 32, color: '#222b45', margin: 0 }}>SQLite Database Viewer</h1>
-                        <p style={{ color: '#8f9bb3', marginTop: 8 }}>Select a table from the sidebar to view its data.</p>
-                      </header>
-                      {error && <div style={{ color: 'red', marginBottom: 16 }}>{error}</div>}
-                      {/* Show a message if no table is selected */}
-                      {!selectedTable && (
-                        <div style={{ color: '#8f9bb3', fontSize: 18, marginTop: 80, textAlign: 'center' }}>
-                          <span>Click a table name on the left to view its data.</span>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/app/*" element={
+          <>
+            <SidebarNavWrapper
+              tables={tables}
+              selectedTable={selectedTable}
+              setSelectedTable={setSelectedTable}
+              sidebarStagings={sidebarStagings}
+              curatedModels={curatedModels}
+              setSelectedCurated={setSelectedCurated}
+              selectedCurated={selectedCurated}
+            />
+            <main style={{ flex: 1, marginLeft: 220 }}>
+              <Routes>
+                <Route index element={
+                  <div style={{ padding: 40 }}>
+                    <header style={{ marginBottom: 32 }}>
+                      <h1 style={{ fontSize: 32, color: '#222b45', margin: 0 }}>SQLite Database Viewer</h1>
+                      <p style={{ color: '#8f9bb3', marginTop: 8 }}>Select a table from the sidebar to view its data.</p>
+                    </header>
+                    {error && <div style={{ color: 'red', marginBottom: 16 }}>{error}</div>}
+                    {!selectedTable && (
+                      <div style={{ color: '#8f9bb3', fontSize: 18, marginTop: 80, textAlign: 'center' }}>
+                        <span>Click a table name on the left to view its data.</span>
+                      </div>
+                    )}
+                    {selectedTable && (
+                      <>
+                        <div style={{ marginBottom: 24, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #0001', padding: 20, display: 'inline-block' }}>
+                          <h2 style={{ margin: 0, color: '#00b887', fontSize: 22 }}>{selectedTable}</h2>
+                          <span style={{ color: '#8f9bb3', fontSize: 14 }}>Rows: {tableData.length}</span>
                         </div>
-                      )}
-                      {selectedTable && (
-                        <>
-                          <div style={{ marginBottom: 24, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #0001', padding: 20, display: 'inline-block' }}>
-                            <h2 style={{ margin: 0, color: '#00b887', fontSize: 22 }}>{selectedTable}</h2>
-                            <span style={{ color: '#8f9bb3', fontSize: 14 }}>Rows: {tableData.length}</span>
-                          </div>
-                          {loading && <p>Loading table data...</p>}
-                          {!loading && tableData.length === 0 && (
-                            <p style={{ color: '#8f9bb3' }}>No data in this table.</p>
-                          )}
-                          {tableData.length > 0 && (
-                            <div style={{ overflow: 'auto', maxHeight: 600, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #0001', padding: 10 }}>
-                              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 13 }}>
-                                <thead>
-                                  <tr>
-                                    {Object.keys(tableData[0]).map(key => (
-                                      <th key={key} style={{ background: '#f7fafc', color: '#222b45', padding: '4px 6px', borderBottom: '2px solid #e4e9f2', position: 'sticky', top: 0, fontWeight: 600 }}>{key}</th>
+                        {loading && <p>Loading table data...</p>}
+                        {!loading && tableData.length === 0 && (
+                          <p style={{ color: '#8f9bb3' }}>No data in this table.</p>
+                        )}
+                        {tableData.length > 0 && (
+                          <div style={{ overflow: 'auto', maxHeight: 600, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #0001', padding: 10 }}>
+                            <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 13 }}>
+                              <thead>
+                                <tr>
+                                  {Object.keys(tableData[0] || {}).map(key => (
+                                    <th key={key} style={{ background: '#f7fafc', color: '#222b45', padding: '4px 6px', borderBottom: '2px solid #e4e9f2', position: 'sticky', top: 0, fontWeight: 600 }}>{key}</th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {tableData.map((row, idx) => (
+                                  <tr key={idx} style={{ background: idx % 2 === 0 ? '#f7fafc' : '#fff', height: 28 }}>
+                                    {Object.values(row).map((val, i) => (
+                                      <td key={i} style={{ padding: '4px 6px', borderBottom: '1px solid #e4e9f2', color: '#333', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{String(val)}</td>
                                     ))}
                                   </tr>
-                                </thead>
-                                <tbody>
-                                  {tableData.map((row, idx) => (
-                                    <tr key={idx} style={{ background: idx % 2 === 0 ? '#f7fafc' : '#fff', height: 28 }}>
-                                      {Object.values(row).map((val, i) => (
-                                        <td key={i} style={{ padding: '4px 6px', borderBottom: '1px solid #e4e9f2', color: '#333', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{String(val)}</td>
-                                      ))}
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  } />
-                  <Route path="/staging" element={<Staging />} />
-                  <Route path="/curated" element={<CuratedModel curatedModels={curatedModels} setCuratedModels={setCuratedModels} selectedCurated={selectedCurated} setSelectedCurated={setSelectedCurated} />} />
-                  {/* Optionally, add /curated/:name route for direct linking */}
-                </Routes>
-              </main>
-            </>
-          } />
-        </Routes>
-      </div>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                } />
+                <Route path="staging" element={<Staging />} />
+                <Route path="curated" element={<CuratedModel curatedModels={curatedModels} setCuratedModels={setCuratedModels} selectedCurated={selectedCurated} setSelectedCurated={setSelectedCurated} />} />
+                {/* Optionally, add /curated/:name route for direct linking */}
+              </Routes>
+            </main>
+          </>
+        } />
+      </Routes>
     </Router>
   );
 }
