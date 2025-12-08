@@ -214,19 +214,57 @@ app.post('/save-staging-sql', (req, res) => {
       preview = await new Promise((resolve, reject) => {
         db.all(previewSQL, (err, rows) => err ? reject(err) : resolve(rows));
       });
-      if (!doc.length && preview.length > 0) {
+      // Normalize documentation structure: ensure 'name' field exists (support both 'column' and 'name')
+      if (doc && doc.length > 0) {
+        doc = doc.map(col => {
+          const normalized = {
+            ...col,
+            name: col.name || col.column || col.source || col.original || '',
+            // Preserve all custom fields
+            description: col.description || '',
+            type: col.type || typeof preview[0]?.[col.name || col.column] || 'string',
+            nullable: col.nullable !== undefined ? col.nullable : (preview.length > 0 ? preview.some(row => row[col.name || col.column] === null || row[col.name || col.column] === '') : false),
+            unique: col.unique !== undefined ? col.unique : (preview.length > 0 ? new Set(preview.map(row => row[col.name || col.column])).size === preview.length : false),
+            testNull: col.testNull || false,
+            testUnique: col.testUnique || false
+          };
+          // Remove old field names to avoid confusion
+          delete normalized.column;
+          return normalized;
+        });
+      } else if (preview.length > 0) {
+        // Generate new documentation if none provided
         const keys = Object.keys(preview[0]);
         doc = keys.map(col => ({
           name: col,
           type: typeof preview[0][col],
           description: '',
           nullable: preview.some(row => row[col] === null || row[col] === ''),
-          unique: new Set(preview.map(row => row[col])).size === preview.length
+          unique: new Set(preview.map(row => row[col])).size === preview.length,
+          testNull: false,
+          testUnique: false
         }));
       }
     } catch (e) {
       preview = [];
-      if (!doc.length) doc = [];
+      // Normalize documentation even if preview fails
+      if (doc && doc.length > 0) {
+        doc = doc.map(col => ({
+          ...col,
+          name: col.name || col.column || col.source || col.original || '',
+          description: col.description || '',
+          type: col.type || 'string',
+          nullable: col.nullable !== undefined ? col.nullable : false,
+          unique: col.unique !== undefined ? col.unique : false,
+          testNull: col.testNull || false,
+          testUnique: col.testUnique || false
+        })).map(col => {
+          delete col.column;
+          return col;
+        });
+      } else {
+        doc = [];
+      }
     }
     // Optionally create table
     if (createTable) {
@@ -372,18 +410,61 @@ app.post('/curated-models', async (req, res) => {
     preview = await new Promise((resolve, reject) => {
       db.all(previewSQL, (err, rows) => err ? reject(err) : resolve(rows));
     });
-    if (!doc.length && preview.length > 0) {
+    // Normalize documentation structure: ensure 'name' field exists and preserve all fields
+    if (doc && doc.length > 0) {
+      doc = doc.map(col => {
+        const normalized = {
+          ...col,
+          name: col.name || col.column || col.source || col.original || '',
+          // Preserve all custom fields
+          description: col.description || '',
+          type: col.type || typeof preview[0]?.[col.name || col.column] || 'string',
+          nullable: col.nullable !== undefined ? col.nullable : (preview.length > 0 ? preview.some(row => row[col.name || col.column] === null || row[col.name || col.column] === '') : false),
+          unique: col.unique !== undefined ? col.unique : (preview.length > 0 ? new Set(preview.map(row => row[col.name || col.column])).size === preview.length : false),
+          testNull: col.testNull || false,
+          testUnique: col.testUnique || false
+        };
+        // Remove old field names to avoid confusion
+        delete normalized.column;
+        return normalized;
+      });
+    } else if (preview.length > 0) {
+      // Generate new documentation if none provided
       const keys = Object.keys(preview[0]);
-      doc = keys.map(col => ({
-        name: col,
-        type: typeof preview[0][col],
-        description: '',
-        unique: new Set(preview.map(row => row[col])).size === preview.length
-      }));
+      doc = keys.map(col => {
+        const values = preview.map(row => row[col]);
+        const nonNullValues = values.filter(v => v !== null && v !== '');
+        return {
+          name: col,
+          type: typeof preview[0][col],
+          description: '',
+          nullable: values.some(v => v === null || v === ''),
+          unique: new Set(nonNullValues).size === nonNullValues.length && nonNullValues.length === preview.length,
+          testNull: false,
+          testUnique: false
+        };
+      });
     }
   } catch (e) {
     preview = [];
-    if (!doc.length) doc = [];
+    // Normalize documentation even if preview fails
+    if (doc && doc.length > 0) {
+      doc = doc.map(col => ({
+        ...col,
+        name: col.name || col.column || col.source || col.original || '',
+        description: col.description || '',
+        type: col.type || 'string',
+        nullable: col.nullable !== undefined ? col.nullable : false,
+        unique: col.unique !== undefined ? col.unique : false,
+        testNull: col.testNull || false,
+        testUnique: col.testUnique || false
+      })).map(col => {
+        delete col.column;
+        return col;
+      });
+    } else {
+      doc = [];
+    }
   }
   db.close();
   // Save metadata

@@ -173,13 +173,24 @@ function Staging() {
         setStagingName(data.name);
         setSqlInput(data.sql);
         setPreviewRows(data.preview || []);
-        setDocumentation((data.documentation || []).map(col => ({
-          ...col,
-          testNull: !!col.testNull,
-          testUnique: !!col.testUnique,
-          nullWarning: "",
-          uniqueWarning: ""
-        })));
+        setDocumentation((data.documentation || []).map(col => {
+          // Normalize field names: support both 'column' (old format) and 'name' (new format)
+          const normalizedCol = {
+            ...col,
+            name: col.name || col.column || col.source || col.original,
+            // Preserve all existing fields
+            type: col.type,
+            description: col.description || '',
+            nullable: col.nullable,
+            unique: col.unique,
+            testNull: !!col.testNull,
+            testUnique: !!col.testUnique,
+            // Reset runtime-only fields
+            nullWarning: "",
+            uniqueWarning: ""
+          };
+          return normalizedCol;
+        }));
         setTableDescription(data.tableDescription || "");
         setDialect(data.dialect || "sqlite");
         setPreviewError("");
