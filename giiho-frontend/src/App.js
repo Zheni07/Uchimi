@@ -176,18 +176,18 @@ function Staging() {
         setDocumentation((data.documentation || []).map(col => {
           // Normalize field names: support both 'column' (old format) and 'name' (new format)
           const normalizedCol = {
-            ...col,
+          ...col,
             name: col.name || col.column || col.source || col.original,
             // Preserve all existing fields
             type: col.type,
             description: col.description || '',
             nullable: col.nullable,
             unique: col.unique,
-            testNull: !!col.testNull,
-            testUnique: !!col.testUnique,
+          testNull: !!col.testNull,
+          testUnique: !!col.testUnique,
             // Reset runtime-only fields
-            nullWarning: "",
-            uniqueWarning: ""
+          nullWarning: "",
+          uniqueWarning: ""
           };
           return normalizedCol;
         }));
@@ -1138,6 +1138,17 @@ function CuratedModel({ curatedModels, setCuratedModels, selectedCurated, setSel
               >
                 {isSaving ? 'Saving...' : 'Save Curated Model'}
               </button>
+              <button
+                onClick={() => {
+                  if (selectedCurated) {
+                    window.open(`http://localhost:4000/curated-model/${selectedCurated}/charts`, '_blank');
+                  }
+                }}
+                disabled={!selectedCurated}
+                style={{ padding: '10px 24px', fontSize: 16, background: '#667eea', color: '#fff', border: 'none', borderRadius: 6, cursor: !selectedCurated ? 'not-allowed' : 'pointer', fontWeight: 600, marginRight: 16 }}
+              >
+                View Charts
+              </button>
               {saveStatus && <span style={{ marginLeft: 18, color: saveStatus.includes('success') ? '#00b887' : 'red', fontWeight: 600 }}>{saveStatus}</span>}
             </div>
             {previewError && <div style={{ color: 'red', marginBottom: 16 }}>{previewError}</div>}
@@ -1248,7 +1259,6 @@ function CuratedModel({ curatedModels, setCuratedModels, selectedCurated, setSel
 
 function App() {
   const [tables, setTables] = useState([]);
-  const [showTables, setShowTables] = useState(false); // Toggle for table list
   const [selectedTable, setSelectedTable] = useState("");
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -2296,5 +2296,6 @@
       "employee_country": "USA"
     }
   ],
-  "timestamp": "2025-08-11T14:00:14.649Z"
+  "timestamp": "2025-08-11T14:00:14.649Z",
+  "chartsPath": "curated_employee_order_charts.html"
 }
